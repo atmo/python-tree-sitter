@@ -1,7 +1,4 @@
-# def extern from "stdbool.h":
-#     ctypedef bint bool 
-
-cdef extern from "vendor/tree-sitter/include/tree_sitter/runtime.h":
+cdef extern from "tree_sitter/runtime.h":
     ctypedef struct TSParser:
         pass
     

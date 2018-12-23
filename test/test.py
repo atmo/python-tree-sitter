@@ -1,4 +1,4 @@
-from parser import Parser
+from tree_sitter import Parser
 from tree_sitter_json import get_language
 
 def main():
