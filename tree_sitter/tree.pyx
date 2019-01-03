@@ -10,3 +10,15 @@ cdef class Tree:
         node = Node()
         node._c_node = cnode
         return node
+
+    def edit(self, delta):
+        raise NotImplementedError
+    
+    def get_changed_ranges(self, other):
+        raise NotImplementedError
+    
+    def get_edited_range(self, other):
+        raise NotImplementedError
+
+    def walk(self):
+        raise NotImplementedError

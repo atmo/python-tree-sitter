@@ -10,6 +10,9 @@ cdef extern from "tree_sitter/runtime.h":
     
     ctypedef struct TSTree:
         pass
+    
+    ctypedef struct TSTreeCursor:
+        pass
 
     TSParser *ts_parser_new()
     void ts_parser_delete(TSParser *parser)

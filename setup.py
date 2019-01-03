@@ -49,6 +49,12 @@ tree_ext = Extension(
     sources= ["tree_sitter/tree.pyx"] + vendor_sources
 )
 
+tree_cursor_ext = Extension(
+    "tree_sitter.tree_cursor",
+    include_dirs=include_dirs,
+    sources= ["tree_sitter/tree_cursor.pyx"] + vendor_sources
+)
+
 
 setup(
     name="tree_sitter",
@@ -56,5 +62,5 @@ setup(
     package_data={
         'tree_sitter': ['*.pxd'],
     },
-    ext_modules=cythonize([parser_ext, language_ext, node_ext, tree_ext])
+    ext_modules=cythonize([parser_ext, language_ext, node_ext, tree_ext, tree_cursor_ext])
 )
