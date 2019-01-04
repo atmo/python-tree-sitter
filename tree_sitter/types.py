@@ -1,18 +1,17 @@
 import attr
 
 @attr.s
-class Position:
+class Point(object):
     row = attr.ib()
     column = attr.ib()
 
-
-@dataclass
-class Range:
+@attr.s
+class Range(object):
     start = attr.ib()
     end = attr.ib()
 
-@dataclass
-class Edit:
+@attr.s
+class Edit(object):
     start_index = attr.ib()
     old_end_index = attr.ib()
     new_end_index = attr.ib()

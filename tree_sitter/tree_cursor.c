@@ -639,6 +639,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__tree_sitter__tree_cursor
 #define __PYX_HAVE_API__tree_sitter__tree_cursor
 /* Early includes */
+#include <stdint.h>
 #include "tree_sitter/runtime.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1057,6 +1058,8 @@ static int __Pyx_check_binary_version(void);
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
+
+/* Module declarations from 'libc.stdint' */
 
 /* Module declarations from 'tree_sitter.binding' */
 
