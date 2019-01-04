@@ -847,8 +847,8 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "stringsource",
   "tree_sitter/parser.pyx",
+  "stringsource",
   "tree_sitter/language.pxd",
   "tree_sitter/node.pxd",
   "tree_sitter/tree.pxd",
@@ -861,10 +861,10 @@ struct __pyx_obj_11tree_sitter_4tree_Tree;
 struct __pyx_obj_11tree_sitter_6parser_Parser;
 
 /* "tree_sitter/language.pxd":3
- * cimport cruntime
+ * from binding cimport TSLanguage
  * 
  * cdef class Language:             # <<<<<<<<<<<<<<
- *     cdef cruntime.TSLanguage* _c_language
+ *     cdef TSLanguage* _c_language
  */
 struct __pyx_obj_11tree_sitter_8language_Language {
   PyObject_HEAD
@@ -873,10 +873,10 @@ struct __pyx_obj_11tree_sitter_8language_Language {
 
 
 /* "tree_sitter/node.pxd":3
- * cimport cruntime
+ * from binding cimport TSNode
  * 
  * cdef class Node:             # <<<<<<<<<<<<<<
- *     cdef cruntime.TSNode _c_node
+ *     cdef TSNode _c_node
  */
 struct __pyx_obj_11tree_sitter_4node_Node {
   PyObject_HEAD
@@ -885,10 +885,10 @@ struct __pyx_obj_11tree_sitter_4node_Node {
 
 
 /* "tree_sitter/tree.pxd":3
- * cimport cruntime
+ * from binding cimport TSTree
  * 
  * cdef class Tree:             # <<<<<<<<<<<<<<
- *     cdef cruntime.TSTree* _c_tree
+ *     cdef TSTree* _c_tree
  */
 struct __pyx_obj_11tree_sitter_4tree_Tree {
   PyObject_HEAD
@@ -896,11 +896,11 @@ struct __pyx_obj_11tree_sitter_4tree_Tree {
 };
 
 
-/* "tree_sitter/parser.pyx":15
- * 
+/* "tree_sitter/parser.pyx":9
+ * from tree_sitter.tree cimport Tree
  * 
  * cdef class Parser:             # <<<<<<<<<<<<<<
- *     cdef cruntime.TSParser* _c_parser
+ *     cdef TSParser* _c_parser
  * 
  */
 struct __pyx_obj_11tree_sitter_6parser_Parser {
@@ -996,42 +996,6 @@ static int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name
         __Pyx__ArgTypeTest(obj, type, name, exact))
 static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact);
 
-/* PyObjectCall.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
-#else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
-/* UnpackUnboundCMethod.proto */
-typedef struct {
-    PyObject *type;
-    PyObject **method_name;
-    PyCFunction func;
-    PyObject *method;
-    int flag;
-} __Pyx_CachedCFunction;
-
-/* CallUnboundCMethod0.proto */
-static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObject* self);
-#if CYTHON_COMPILING_IN_CPYTHON
-#define __Pyx_CallUnboundCMethod0(cfunc, self)\
-    (likely((cfunc)->func) ?\
-        (likely((cfunc)->flag == METH_NOARGS) ?  (*((cfunc)->func))(self, NULL) :\
-         (PY_VERSION_HEX >= 0x030600B1 && likely((cfunc)->flag == METH_FASTCALL) ?\
-            (PY_VERSION_HEX >= 0x030700A0 ?\
-                (*(__Pyx_PyCFunctionFast)(void*)(PyCFunction)(cfunc)->func)(self, &__pyx_empty_tuple, 0) :\
-                (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)(cfunc)->func)(self, &__pyx_empty_tuple, 0, NULL)) :\
-          (PY_VERSION_HEX >= 0x030700A0 && (cfunc)->flag == (METH_FASTCALL | METH_KEYWORDS) ?\
-            (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)(cfunc)->func)(self, &__pyx_empty_tuple, 0, NULL) :\
-            (likely((cfunc)->flag == (METH_VARARGS | METH_KEYWORDS)) ?  ((*(PyCFunctionWithKeywords)(void*)(PyCFunction)(cfunc)->func)(self, __pyx_empty_tuple, NULL)) :\
-               ((cfunc)->flag == METH_VARARGS ?  (*((cfunc)->func))(self, __pyx_empty_tuple) :\
-               __Pyx__CallUnboundCMethod0(cfunc, self)))))) :\
-        __Pyx__CallUnboundCMethod0(cfunc, self))
-#else
-#define __Pyx_CallUnboundCMethod0(cfunc, self)  __Pyx__CallUnboundCMethod0(cfunc, self)
-#endif
-
 /* PyFunctionFastCall.proto */
 #if CYTHON_FAST_PYCALL
 #define __Pyx_PyFunction_FastCall(func, args, nargs)\
@@ -1055,6 +1019,13 @@ static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, 
     (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
 #endif
 
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
 /* PyObjectCallMethO.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
@@ -1066,6 +1037,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 #else
 #define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
+
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
+    const char* function_name);
 
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -1105,6 +1084,35 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* UnpackUnboundCMethod.proto */
+typedef struct {
+    PyObject *type;
+    PyObject **method_name;
+    PyCFunction func;
+    PyObject *method;
+    int flag;
+} __Pyx_CachedCFunction;
+
+/* CallUnboundCMethod0.proto */
+static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObject* self);
+#if CYTHON_COMPILING_IN_CPYTHON
+#define __Pyx_CallUnboundCMethod0(cfunc, self)\
+    (likely((cfunc)->func) ?\
+        (likely((cfunc)->flag == METH_NOARGS) ?  (*((cfunc)->func))(self, NULL) :\
+         (PY_VERSION_HEX >= 0x030600B1 && likely((cfunc)->flag == METH_FASTCALL) ?\
+            (PY_VERSION_HEX >= 0x030700A0 ?\
+                (*(__Pyx_PyCFunctionFast)(void*)(PyCFunction)(cfunc)->func)(self, &__pyx_empty_tuple, 0) :\
+                (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)(cfunc)->func)(self, &__pyx_empty_tuple, 0, NULL)) :\
+          (PY_VERSION_HEX >= 0x030700A0 && (cfunc)->flag == (METH_FASTCALL | METH_KEYWORDS) ?\
+            (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)(cfunc)->func)(self, &__pyx_empty_tuple, 0, NULL) :\
+            (likely((cfunc)->flag == (METH_VARARGS | METH_KEYWORDS)) ?  ((*(PyCFunctionWithKeywords)(void*)(PyCFunction)(cfunc)->func)(self, __pyx_empty_tuple, NULL)) :\
+               ((cfunc)->flag == METH_VARARGS ?  (*((cfunc)->func))(self, __pyx_empty_tuple) :\
+               __Pyx__CallUnboundCMethod0(cfunc, self)))))) :\
+        __Pyx__CallUnboundCMethod0(cfunc, self))
+#else
+#define __Pyx_CallUnboundCMethod0(cfunc, self)  __Pyx__CallUnboundCMethod0(cfunc, self)
+#endif
 
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
@@ -1189,7 +1197,7 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'tree_sitter.cruntime' */
+/* Module declarations from 'tree_sitter.binding' */
 
 /* Module declarations from 'tree_sitter.language' */
 static PyTypeObject *__pyx_ptype_11tree_sitter_8language_Language = 0;
@@ -1207,6 +1215,7 @@ extern int __pyx_module_is_main_tree_sitter__parser;
 int __pyx_module_is_main_tree_sitter__parser = 0;
 
 /* Implementation of 'tree_sitter.parser' */
+static PyObject *__pyx_builtin_NotImplementedError;
 static PyObject *__pyx_builtin_TypeError;
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
@@ -1214,14 +1223,18 @@ static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_Parser[] = "Parser";
 static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_source[] = "source";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
+static const char __pyx_k_previous_tree[] = "previous_tree";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
+static PyObject *__pyx_n_s_NotImplementedError;
 static PyObject *__pyx_n_s_Parser;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
@@ -1230,29 +1243,34 @@ static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
+static PyObject *__pyx_n_s_previous_tree;
 static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
+static PyObject *__pyx_n_s_source;
 static PyObject *__pyx_n_s_test;
 static int __pyx_pf_11tree_sitter_6parser_6Parser___cinit__(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_2__deallloc__(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_4set_language(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, struct __pyx_obj_11tree_sitter_8language_Language *__pyx_v_language); /* proto */
-static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6parse(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, PyObject *__pyx_v_source); /* proto */
-static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8language___get__(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6parse(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, PyObject *__pyx_v_source, struct __pyx_obj_11tree_sitter_4tree_Tree *__pyx_v_previous_tree); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8set_logger(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_logger); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6logger___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_11tree_sitter_6parser_Parser(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static __Pyx_CachedCFunction __pyx_umethod_PyString_Type_encode = {0, &__pyx_n_s_encode, 0, 0, 0};
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "tree_sitter/parser.pyx":18
- *     cdef cruntime.TSParser* _c_parser
+/* "tree_sitter/parser.pyx":12
+ *     cdef TSParser* _c_parser
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         self._c_parser = cruntime.ts_parser_new()
+ *         self._c_parser = ts_parser_new()
  * 
  */
 
@@ -1277,20 +1295,20 @@ static int __pyx_pf_11tree_sitter_6parser_6Parser___cinit__(struct __pyx_obj_11t
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "tree_sitter/parser.pyx":19
+  /* "tree_sitter/parser.pyx":13
  * 
  *     def __cinit__(self):
- *         self._c_parser = cruntime.ts_parser_new()             # <<<<<<<<<<<<<<
+ *         self._c_parser = ts_parser_new()             # <<<<<<<<<<<<<<
  * 
  *     def __deallloc__(self):
  */
   __pyx_v_self->_c_parser = ts_parser_new();
 
-  /* "tree_sitter/parser.pyx":18
- *     cdef cruntime.TSParser* _c_parser
+  /* "tree_sitter/parser.pyx":12
+ *     cdef TSParser* _c_parser
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         self._c_parser = cruntime.ts_parser_new()
+ *         self._c_parser = ts_parser_new()
  * 
  */
 
@@ -1300,11 +1318,11 @@ static int __pyx_pf_11tree_sitter_6parser_6Parser___cinit__(struct __pyx_obj_11t
   return __pyx_r;
 }
 
-/* "tree_sitter/parser.pyx":21
- *         self._c_parser = cruntime.ts_parser_new()
+/* "tree_sitter/parser.pyx":15
+ *         self._c_parser = ts_parser_new()
  * 
  *     def __deallloc__(self):             # <<<<<<<<<<<<<<
- *         cruntime.ts_parser_delete(self._c_parser)
+ *         ts_parser_delete(self._c_parser)
  * 
  */
 
@@ -1326,20 +1344,20 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_2__deallloc__(struct __p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__deallloc__", 0);
 
-  /* "tree_sitter/parser.pyx":22
+  /* "tree_sitter/parser.pyx":16
  * 
  *     def __deallloc__(self):
- *         cruntime.ts_parser_delete(self._c_parser)             # <<<<<<<<<<<<<<
+ *         ts_parser_delete(self._c_parser)             # <<<<<<<<<<<<<<
  * 
  *     def set_language(self, Language language):
  */
   ts_parser_delete(__pyx_v_self->_c_parser);
 
-  /* "tree_sitter/parser.pyx":21
- *         self._c_parser = cruntime.ts_parser_new()
+  /* "tree_sitter/parser.pyx":15
+ *         self._c_parser = ts_parser_new()
  * 
  *     def __deallloc__(self):             # <<<<<<<<<<<<<<
- *         cruntime.ts_parser_delete(self._c_parser)
+ *         ts_parser_delete(self._c_parser)
  * 
  */
 
@@ -1350,11 +1368,11 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_2__deallloc__(struct __p
   return __pyx_r;
 }
 
-/* "tree_sitter/parser.pyx":24
- *         cruntime.ts_parser_delete(self._c_parser)
+/* "tree_sitter/parser.pyx":18
+ *         ts_parser_delete(self._c_parser)
  * 
  *     def set_language(self, Language language):             # <<<<<<<<<<<<<<
- *         return cruntime.ts_parser_set_language(self._c_parser, <cruntime.TSLanguage*>language._c_language)
+ *         return ts_parser_set_language(self._c_parser, <TSLanguage*>language._c_language)
  * 
  */
 
@@ -1364,7 +1382,7 @@ static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_5set_language(PyObject *
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_language (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_language), __pyx_ptype_11tree_sitter_8language_Language, 1, "language", 0))) __PYX_ERR(1, 24, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_language), __pyx_ptype_11tree_sitter_8language_Language, 1, "language", 0))) __PYX_ERR(0, 18, __pyx_L1_error)
   __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_4set_language(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self), ((struct __pyx_obj_11tree_sitter_8language_Language *)__pyx_v_language));
 
   /* function exit code */
@@ -1382,25 +1400,25 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_4set_language(struct __p
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("set_language", 0);
 
-  /* "tree_sitter/parser.pyx":25
+  /* "tree_sitter/parser.pyx":19
  * 
  *     def set_language(self, Language language):
- *         return cruntime.ts_parser_set_language(self._c_parser, <cruntime.TSLanguage*>language._c_language)             # <<<<<<<<<<<<<<
+ *         return ts_parser_set_language(self._c_parser, <TSLanguage*>language._c_language)             # <<<<<<<<<<<<<<
  * 
- *     def parse(self, str source):
+ *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(ts_parser_set_language(__pyx_v_self->_c_parser, ((TSLanguage *)__pyx_v_language->_c_language))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(ts_parser_set_language(__pyx_v_self->_c_parser, ((TSLanguage *)__pyx_v_language->_c_language))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tree_sitter/parser.pyx":24
- *         cruntime.ts_parser_delete(self._c_parser)
+  /* "tree_sitter/parser.pyx":18
+ *         ts_parser_delete(self._c_parser)
  * 
  *     def set_language(self, Language language):             # <<<<<<<<<<<<<<
- *         return cruntime.ts_parser_set_language(self._c_parser, <cruntime.TSLanguage*>language._c_language)
+ *         return ts_parser_set_language(self._c_parser, <TSLanguage*>language._c_language)
  * 
  */
 
@@ -1415,22 +1433,156 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_4set_language(struct __p
   return __pyx_r;
 }
 
-/* "tree_sitter/parser.pyx":27
- *         return cruntime.ts_parser_set_language(self._c_parser, <cruntime.TSLanguage*>language._c_language)
+/* "tree_sitter/parser.pyx":22
  * 
- *     def parse(self, str source):             # <<<<<<<<<<<<<<
- *         cdef bytes source_bytes = source.encode()
- *         cdef cruntime.TSTree* ctree = cruntime.ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
+ *     @property
+ *     def language(self) -> Language:             # <<<<<<<<<<<<<<
+ *         language = Language()
+ *         language._c_language = ts_parser_language(self._c_parser)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_7parse(PyObject *__pyx_v_self, PyObject *__pyx_v_source); /*proto*/
-static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_7parse(PyObject *__pyx_v_self, PyObject *__pyx_v_source) {
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_8language_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_8language_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_8language___get__(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8language___get__(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self) {
+  struct __pyx_obj_11tree_sitter_8language_Language *__pyx_v_language = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/parser.pyx":23
+ *     @property
+ *     def language(self) -> Language:
+ *         language = Language()             # <<<<<<<<<<<<<<
+ *         language._c_language = ts_parser_language(self._c_parser)
+ *         return language
+ */
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_11tree_sitter_8language_Language)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_language = ((struct __pyx_obj_11tree_sitter_8language_Language *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "tree_sitter/parser.pyx":24
+ *     def language(self) -> Language:
+ *         language = Language()
+ *         language._c_language = ts_parser_language(self._c_parser)             # <<<<<<<<<<<<<<
+ *         return language
+ * 
+ */
+  __pyx_v_language->_c_language = ts_parser_language(__pyx_v_self->_c_parser);
+
+  /* "tree_sitter/parser.pyx":25
+ *         language = Language()
+ *         language._c_language = ts_parser_language(self._c_parser)
+ *         return language             # <<<<<<<<<<<<<<
+ * 
+ *     # TODO: implement async version if needed
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(((PyObject *)__pyx_v_language));
+  __pyx_r = ((PyObject *)__pyx_v_language);
+  goto __pyx_L0;
+
+  /* "tree_sitter/parser.pyx":22
+ * 
+ *     @property
+ *     def language(self) -> Language:             # <<<<<<<<<<<<<<
+ *         language = Language()
+ *         language._c_language = ts_parser_language(self._c_parser)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tree_sitter.parser.Parser.language.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_language);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/parser.pyx":28
+ * 
+ *     # TODO: implement async version if needed
+ *     def parse(self, str source, Tree previous_tree=None):             # <<<<<<<<<<<<<<
+ *         if previous_tree is not None:
+ *             raise NotImplementedError
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_7parse(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_7parse(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_source = 0;
+  struct __pyx_obj_11tree_sitter_4tree_Tree *__pyx_v_previous_tree = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("parse (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_source), (&PyString_Type), 1, "source", 1))) __PYX_ERR(1, 27, __pyx_L1_error)
-  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_6parse(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self), ((PyObject*)__pyx_v_source));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_source,&__pyx_n_s_previous_tree,0};
+    PyObject* values[2] = {0,0};
+    values[1] = (PyObject *)((struct __pyx_obj_11tree_sitter_4tree_Tree *)Py_None);
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_source)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_previous_tree);
+          if (value) { values[1] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "parse") < 0)) __PYX_ERR(0, 28, __pyx_L3_error)
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_source = ((PyObject*)values[0]);
+    __pyx_v_previous_tree = ((struct __pyx_obj_11tree_sitter_4tree_Tree *)values[1]);
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("parse", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 28, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("tree_sitter.parser.Parser.parse", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_source), (&PyString_Type), 1, "source", 1))) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_previous_tree), __pyx_ptype_11tree_sitter_4tree_Tree, 1, "previous_tree", 0))) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_6parse(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self), __pyx_v_source, __pyx_v_previous_tree);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1441,63 +1593,95 @@ static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_7parse(PyObject *__pyx_v
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6parse(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, PyObject *__pyx_v_source) {
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6parse(struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, PyObject *__pyx_v_source, struct __pyx_obj_11tree_sitter_4tree_Tree *__pyx_v_previous_tree) {
   PyObject *__pyx_v_source_bytes = 0;
   TSTree *__pyx_v_ctree;
   struct __pyx_obj_11tree_sitter_4tree_Tree *__pyx_v_tree = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  char *__pyx_t_2;
-  Py_ssize_t __pyx_t_3;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  char *__pyx_t_4;
+  Py_ssize_t __pyx_t_5;
   __Pyx_RefNannySetupContext("parse", 0);
 
-  /* "tree_sitter/parser.pyx":28
+  /* "tree_sitter/parser.pyx":29
+ *     # TODO: implement async version if needed
+ *     def parse(self, str source, Tree previous_tree=None):
+ *         if previous_tree is not None:             # <<<<<<<<<<<<<<
+ *             raise NotImplementedError
  * 
- *     def parse(self, str source):
+ */
+  __pyx_t_1 = (((PyObject *)__pyx_v_previous_tree) != Py_None);
+  __pyx_t_2 = (__pyx_t_1 != 0);
+  if (unlikely(__pyx_t_2)) {
+
+    /* "tree_sitter/parser.pyx":30
+ *     def parse(self, str source, Tree previous_tree=None):
+ *         if previous_tree is not None:
+ *             raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *         cdef bytes source_bytes = source.encode()
+ */
+    __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+    __PYX_ERR(0, 30, __pyx_L1_error)
+
+    /* "tree_sitter/parser.pyx":29
+ *     # TODO: implement async version if needed
+ *     def parse(self, str source, Tree previous_tree=None):
+ *         if previous_tree is not None:             # <<<<<<<<<<<<<<
+ *             raise NotImplementedError
+ * 
+ */
+  }
+
+  /* "tree_sitter/parser.pyx":32
+ *             raise NotImplementedError
+ * 
  *         cdef bytes source_bytes = source.encode()             # <<<<<<<<<<<<<<
- *         cdef cruntime.TSTree* ctree = cruntime.ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
+ *         cdef TSTree* ctree = ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
  *         tree = Tree()
  */
-  __pyx_t_1 = __Pyx_CallUnboundCMethod0(&__pyx_umethod_PyString_Type_encode, __pyx_v_source); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyBytes_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(1, 28, __pyx_L1_error)
-  __pyx_v_source_bytes = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_t_3 = __Pyx_CallUnboundCMethod0(&__pyx_umethod_PyString_Type_encode, __pyx_v_source); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_v_source_bytes = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
 
-  /* "tree_sitter/parser.pyx":29
- *     def parse(self, str source):
+  /* "tree_sitter/parser.pyx":33
+ * 
  *         cdef bytes source_bytes = source.encode()
- *         cdef cruntime.TSTree* ctree = cruntime.ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))             # <<<<<<<<<<<<<<
+ *         cdef TSTree* ctree = ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))             # <<<<<<<<<<<<<<
  *         tree = Tree()
  *         tree._c_tree = ctree
  */
   if (unlikely(__pyx_v_source_bytes == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(1, 29, __pyx_L1_error)
+    __PYX_ERR(0, 33, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_source_bytes); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(1, 29, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyBytes_AsWritableString(__pyx_v_source_bytes); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L1_error)
   if (unlikely(__pyx_v_source_bytes == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(1, 29, __pyx_L1_error)
+    __PYX_ERR(0, 33, __pyx_L1_error)
   }
-  __pyx_t_3 = PyBytes_GET_SIZE(__pyx_v_source_bytes); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(1, 29, __pyx_L1_error)
-  __pyx_v_ctree = ts_parser_parse_string(__pyx_v_self->_c_parser, NULL, ((char *)__pyx_t_2), __pyx_t_3);
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_source_bytes); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_v_ctree = ts_parser_parse_string(__pyx_v_self->_c_parser, NULL, ((char *)__pyx_t_4), __pyx_t_5);
 
-  /* "tree_sitter/parser.pyx":30
+  /* "tree_sitter/parser.pyx":34
  *         cdef bytes source_bytes = source.encode()
- *         cdef cruntime.TSTree* ctree = cruntime.ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
+ *         cdef TSTree* ctree = ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
  *         tree = Tree()             # <<<<<<<<<<<<<<
  *         tree._c_tree = ctree
  *         return tree
  */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_11tree_sitter_4tree_Tree)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_tree = ((struct __pyx_obj_11tree_sitter_4tree_Tree *)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_t_3 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_11tree_sitter_4tree_Tree)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_tree = ((struct __pyx_obj_11tree_sitter_4tree_Tree *)__pyx_t_3);
+  __pyx_t_3 = 0;
 
-  /* "tree_sitter/parser.pyx":31
- *         cdef cruntime.TSTree* ctree = cruntime.ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
+  /* "tree_sitter/parser.pyx":35
+ *         cdef TSTree* ctree = ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
  *         tree = Tree()
  *         tree._c_tree = ctree             # <<<<<<<<<<<<<<
  *         return tree
@@ -1505,34 +1689,136 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6parse(struct __pyx_obj_
  */
   __pyx_v_tree->_c_tree = __pyx_v_ctree;
 
-  /* "tree_sitter/parser.pyx":32
+  /* "tree_sitter/parser.pyx":36
  *         tree = Tree()
  *         tree._c_tree = ctree
  *         return tree             # <<<<<<<<<<<<<<
  * 
- *     # cpdef cruntime.TSTree* _parse_with_tree(self, const char* source, cruntime.TSTree* tree):
+ *     # let's imagine logger is a callable for now
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_tree));
   __pyx_r = ((PyObject *)__pyx_v_tree);
   goto __pyx_L0;
 
-  /* "tree_sitter/parser.pyx":27
- *         return cruntime.ts_parser_set_language(self._c_parser, <cruntime.TSLanguage*>language._c_language)
+  /* "tree_sitter/parser.pyx":28
  * 
- *     def parse(self, str source):             # <<<<<<<<<<<<<<
- *         cdef bytes source_bytes = source.encode()
- *         cdef cruntime.TSTree* ctree = cruntime.ts_parser_parse_string(self._c_parser, NULL, <char*>source_bytes, len(source_bytes))
+ *     # TODO: implement async version if needed
+ *     def parse(self, str source, Tree previous_tree=None):             # <<<<<<<<<<<<<<
+ *         if previous_tree is not None:
+ *             raise NotImplementedError
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_AddTraceback("tree_sitter.parser.Parser.parse", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_source_bytes);
   __Pyx_XDECREF((PyObject *)__pyx_v_tree);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/parser.pyx":39
+ * 
+ *     # let's imagine logger is a callable for now
+ *     def set_logger(self, logger):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_9set_logger(PyObject *__pyx_v_self, PyObject *__pyx_v_logger); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_9set_logger(PyObject *__pyx_v_self, PyObject *__pyx_v_logger) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_logger (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_8set_logger(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self), ((PyObject *)__pyx_v_logger));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8set_logger(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_logger) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_logger", 0);
+
+  /* "tree_sitter/parser.pyx":40
+ *     # let's imagine logger is a callable for now
+ *     def set_logger(self, logger):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 40, __pyx_L1_error)
+
+  /* "tree_sitter/parser.pyx":39
+ * 
+ *     # let's imagine logger is a callable for now
+ *     def set_logger(self, logger):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.parser.Parser.set_logger", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/parser.pyx":43
+ * 
+ *     @property
+ *     def logger(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_6logger_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_6logger_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_6logger___get__(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6logger___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/parser.pyx":44
+ *     @property
+ *     def logger(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 44, __pyx_L1_error)
+
+  /* "tree_sitter/parser.pyx":43
+ * 
+ *     @property
+ *     def logger(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.parser.Parser.logger.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1545,19 +1831,19 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_6parse(struct __pyx_obj_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_11__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_11__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_8__reduce_cython__(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_10__reduce_cython__(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self) {
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1569,11 +1855,11 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8__reduce_cython__(CYTHO
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 2, __pyx_L1_error)
+  __PYX_ERR(1, 2, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -1599,19 +1885,19 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_8__reduce_cython__(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_13__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_6parser_6Parser_13__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_10__setstate_cython__(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_11tree_sitter_6parser_6Parser_12__setstate_cython__(((struct __pyx_obj_11tree_sitter_6parser_Parser *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_6parser_Parser *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1622,11 +1908,11 @@ static PyObject *__pyx_pf_11tree_sitter_6parser_6Parser_10__setstate_cython__(CY
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 4, __pyx_L1_error)
+  __PYX_ERR(1, 4, __pyx_L1_error)
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
@@ -1669,13 +1955,28 @@ static void __pyx_tp_dealloc_11tree_sitter_6parser_Parser(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
+static PyObject *__pyx_getprop_11tree_sitter_6parser_6Parser_language(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_6parser_6Parser_8language_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_11tree_sitter_6parser_6Parser_logger(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_6parser_6Parser_6logger_1__get__(o);
+}
+
 static PyMethodDef __pyx_methods_11tree_sitter_6parser_Parser[] = {
   {"__deallloc__", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_3__deallloc__, METH_NOARGS, 0},
   {"set_language", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_5set_language, METH_O, 0},
-  {"parse", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_7parse, METH_O, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_9__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_11__setstate_cython__, METH_O, 0},
+  {"parse", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_11tree_sitter_6parser_6Parser_7parse, METH_VARARGS|METH_KEYWORDS, 0},
+  {"set_logger", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_9set_logger, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_11__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_11tree_sitter_6parser_6Parser_13__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_11tree_sitter_6parser_Parser[] = {
+  {(char *)"language", __pyx_getprop_11tree_sitter_6parser_6Parser_language, 0, (char *)0, 0},
+  {(char *)"logger", __pyx_getprop_11tree_sitter_6parser_6Parser_logger, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
 };
 
 static PyTypeObject __pyx_type_11tree_sitter_6parser_Parser = {
@@ -1713,7 +2014,7 @@ static PyTypeObject __pyx_type_11tree_sitter_6parser_Parser = {
   0, /*tp_iternext*/
   __pyx_methods_11tree_sitter_6parser_Parser, /*tp_methods*/
   0, /*tp_members*/
-  0, /*tp_getset*/
+  __pyx_getsets_11tree_sitter_6parser_Parser, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
@@ -1782,6 +2083,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
   {&__pyx_n_s_Parser, __pyx_k_Parser, sizeof(__pyx_k_Parser), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
@@ -1790,16 +2092,19 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
+  {&__pyx_n_s_previous_tree, __pyx_k_previous_tree, sizeof(__pyx_k_previous_tree), 0, 0, 1, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+  {&__pyx_n_s_source, __pyx_k_source, sizeof(__pyx_k_source), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1815,7 +2120,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -1824,7 +2129,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
   __Pyx_RefNannyFinishContext();
@@ -1836,7 +2141,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   __pyx_umethod_PyString_Type_encode.type = (PyObject*)&PyString_Type;
-  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1878,13 +2183,13 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_11tree_sitter_6parser_Parser) < 0) __PYX_ERR(1, 15, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11tree_sitter_6parser_Parser) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __pyx_type_11tree_sitter_6parser_Parser.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_11tree_sitter_6parser_Parser.tp_dictoffset && __pyx_type_11tree_sitter_6parser_Parser.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_11tree_sitter_6parser_Parser.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Parser, (PyObject *)&__pyx_type_11tree_sitter_6parser_Parser) < 0) __PYX_ERR(1, 15, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11tree_sitter_6parser_Parser) < 0) __PYX_ERR(1, 15, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Parser, (PyObject *)&__pyx_type_11tree_sitter_6parser_Parser) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11tree_sitter_6parser_Parser) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __pyx_ptype_11tree_sitter_6parser_Parser = &__pyx_type_11tree_sitter_6parser_Parser;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -2050,30 +2355,30 @@ if (!__Pyx_RefNanny) {
 }
 #endif
   __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_parser(void)", 0);
-  if (__Pyx_check_binary_version() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
   #endif
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -2092,36 +2397,36 @@ if (!__Pyx_RefNanny) {
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
-  if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 1, __pyx_L1_error)
   #if CYTHON_COMPILING_IN_PYPY
   Py_INCREF(__pyx_b);
   #endif
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_tree_sitter__parser) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
     if (!PyDict_GetItemString(modules, "tree_sitter.parser")) {
-      if (unlikely(PyDict_SetItemString(modules, "tree_sitter.parser", __pyx_m) < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+      if (unlikely(PyDict_SetItemString(modules, "tree_sitter.parser", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
@@ -2132,17 +2437,17 @@ if (!__Pyx_RefNanny) {
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
   /* "tree_sitter/parser.pyx":1
- * cimport cruntime             # <<<<<<<<<<<<<<
- * from tree_sitter.language cimport Language
- * from tree_sitter.node cimport Node
+ * from binding cimport (TSLanguage, TSParser, TSTree, ts_parser_new,             # <<<<<<<<<<<<<<
+ *     ts_parser_delete, ts_parser_set_language, ts_parser_language,
+ *     ts_parser_parse_string)
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /*--- Wrapped vars code ---*/
@@ -2302,65 +2607,6 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
     return 0;
 }
 
-/* PyObjectCall */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
-/* UnpackUnboundCMethod */
-static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
-    PyObject *method;
-    method = __Pyx_PyObject_GetAttrStr(target->type, *target->method_name);
-    if (unlikely(!method))
-        return -1;
-    target->method = method;
-#if CYTHON_COMPILING_IN_CPYTHON
-    #if PY_MAJOR_VERSION >= 3
-    if (likely(__Pyx_TypeCheck(method, &PyMethodDescr_Type)))
-    #endif
-    {
-        PyMethodDescrObject *descr = (PyMethodDescrObject*) method;
-        target->func = descr->d_method->ml_meth;
-        target->flag = descr->d_method->ml_flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_STACKLESS);
-    }
-#endif
-    return 0;
-}
-
-/* CallUnboundCMethod0 */
-static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObject* self) {
-    PyObject *args, *result = NULL;
-    if (unlikely(!cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
-#if CYTHON_ASSUME_SAFE_MACROS
-    args = PyTuple_New(1);
-    if (unlikely(!args)) goto bad;
-    Py_INCREF(self);
-    PyTuple_SET_ITEM(args, 0, self);
-#else
-    args = PyTuple_Pack(1, self);
-    if (unlikely(!args)) goto bad;
-#endif
-    result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
-    Py_DECREF(args);
-bad:
-    return result;
-}
-
 /* PyFunctionFastCall */
 #if CYTHON_FAST_PYCALL
 static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
@@ -2480,6 +2726,26 @@ done:
 #endif
 #endif
 
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
 /* PyObjectCallMethO */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
@@ -2521,6 +2787,122 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
     return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
 }
 #endif
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
 
 /* PyErrFetchRestore */
 #if CYTHON_FAST_THREAD_STATE
@@ -2704,6 +3086,45 @@ bad:
     return;
 }
 #endif
+
+/* UnpackUnboundCMethod */
+static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
+    PyObject *method;
+    method = __Pyx_PyObject_GetAttrStr(target->type, *target->method_name);
+    if (unlikely(!method))
+        return -1;
+    target->method = method;
+#if CYTHON_COMPILING_IN_CPYTHON
+    #if PY_MAJOR_VERSION >= 3
+    if (likely(__Pyx_TypeCheck(method, &PyMethodDescr_Type)))
+    #endif
+    {
+        PyMethodDescrObject *descr = (PyMethodDescrObject*) method;
+        target->func = descr->d_method->ml_meth;
+        target->flag = descr->d_method->ml_flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_STACKLESS);
+    }
+#endif
+    return 0;
+}
+
+/* CallUnboundCMethod0 */
+static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObject* self) {
+    PyObject *args, *result = NULL;
+    if (unlikely(!cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
+#if CYTHON_ASSUME_SAFE_MACROS
+    args = PyTuple_New(1);
+    if (unlikely(!args)) goto bad;
+    Py_INCREF(self);
+    PyTuple_SET_ITEM(args, 0, self);
+#else
+    args = PyTuple_Pack(1, self);
+    if (unlikely(!args)) goto bad;
+#endif
+    result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
+    Py_DECREF(args);
+bad:
+    return result;
+}
 
 /* PyObject_GenericGetAttrNoDict */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000

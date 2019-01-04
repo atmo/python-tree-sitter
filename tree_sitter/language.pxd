@@ -1,4 +1,4 @@
-cimport cruntime
+from binding cimport TSLanguage
 
 cdef class Language:
-    cdef cruntime.TSLanguage* _c_language
+    cdef TSLanguage* _c_language

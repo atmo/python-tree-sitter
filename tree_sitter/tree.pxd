@@ -1,4 +1,4 @@
-cimport cruntime
+from binding cimport TSTree
 
 cdef class Tree:
-    cdef cruntime.TSTree* _c_tree
+    cdef TSTree* _c_tree

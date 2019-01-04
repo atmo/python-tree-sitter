@@ -11,9 +11,9 @@
             "vendor/tree-sitter/src/", 
             "vendor/tree-sitter/externals/utf8proc"
         ], 
-        "name": "tree_sitter.language", 
+        "name": "tree_sitter.tree_cursor", 
         "sources": [
-            "tree_sitter/language.pyx", 
+            "tree_sitter/tree_cursor.pyx", 
             "vendor/tree-sitter/src/runtime/get_changed_ranges.c", 
             "vendor/tree-sitter/src/runtime/language.c", 
             "vendor/tree-sitter/src/runtime/lexer.c", 
@@ -27,7 +27,7 @@
             "vendor/tree-sitter/externals/utf8proc/utf8proc.c"
         ]
     }, 
-    "module_name": "tree_sitter.language"
+    "module_name": "tree_sitter.tree_cursor"
 }
 END: Cython Metadata */
 
@@ -636,8 +636,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__tree_sitter__language
-#define __PYX_HAVE_API__tree_sitter__language
+#define __PYX_HAVE__tree_sitter__tree_cursor
+#define __PYX_HAVE_API__tree_sitter__tree_cursor
 /* Early includes */
 #include "tree_sitter/runtime.h"
 #ifdef _OPENMP
@@ -847,22 +847,22 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "tree_sitter/language.pyx",
-  "tree_sitter/language.pxd",
+  "tree_sitter/tree_cursor.pyx",
+  "stringsource",
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj_11tree_sitter_8language_Language;
+struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor;
 
-/* "tree_sitter/language.pxd":3
- * from binding cimport TSLanguage
+/* "tree_sitter/tree_cursor.pxd":3
+ * from binding cimport TSTreeCursor
  * 
- * cdef class Language:             # <<<<<<<<<<<<<<
- *     cdef TSLanguage* _c_language
+ * cdef class TreeCursor:             # <<<<<<<<<<<<<<
+ *     cdef TSTreeCursor _c_cursor
  */
-struct __pyx_obj_11tree_sitter_8language_Language {
+struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor {
   PyObject_HEAD
-  TSLanguage *_c_language;
+  TSTreeCursor _c_cursor;
 };
 
 
@@ -930,26 +930,15 @@ struct __pyx_obj_11tree_sitter_8language_Language {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
-/* PyObject_GenericGetAttrNoDict.proto */
-#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
-#else
-#define __Pyx_PyObject_GenericGetAttrNoDict PyObject_GenericGetAttr
-#endif
-
-/* PyObject_GenericGetAttr.proto */
-#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
-static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_name);
-#else
-#define __Pyx_PyObject_GenericGetAttr PyObject_GenericGetAttr
-#endif
-
 /* PyObjectGetAttrStr.proto */
 #if CYTHON_USE_TYPE_SLOTS
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name);
 #else
 #define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
 #endif
+
+/* GetBuiltinName.proto */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -986,6 +975,33 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 #define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
 #define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
 #endif
+
+/* RaiseException.proto */
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
+/* PyObject_GenericGetAttrNoDict.proto */
+#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
+#else
+#define __Pyx_PyObject_GenericGetAttrNoDict PyObject_GenericGetAttr
+#endif
+
+/* PyObject_GenericGetAttr.proto */
+#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
+static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_name);
+#else
+#define __Pyx_PyObject_GenericGetAttr PyObject_GenericGetAttr
+#endif
+
+/* SetupReduce.proto */
+static int __Pyx_setup_reduce(PyObject* type_obj);
 
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
@@ -1044,27 +1060,694 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'tree_sitter.binding' */
 
-/* Module declarations from 'tree_sitter.language' */
-static PyTypeObject *__pyx_ptype_11tree_sitter_8language_Language = 0;
-#define __Pyx_MODULE_NAME "tree_sitter.language"
-extern int __pyx_module_is_main_tree_sitter__language;
-int __pyx_module_is_main_tree_sitter__language = 0;
+/* Module declarations from 'tree_sitter.tree_cursor' */
+static PyTypeObject *__pyx_ptype_11tree_sitter_11tree_cursor_TreeCursor = 0;
+#define __Pyx_MODULE_NAME "tree_sitter.tree_cursor"
+extern int __pyx_module_is_main_tree_sitter__tree_cursor;
+int __pyx_module_is_main_tree_sitter__tree_cursor = 0;
 
-/* Implementation of 'tree_sitter.language' */
+/* Implementation of 'tree_sitter.tree_cursor' */
+static PyObject *__pyx_builtin_NotImplementedError;
+static PyObject *__pyx_builtin_TypeError;
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_Language[] = "Language";
+static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_getstate[] = "__getstate__";
+static const char __pyx_k_setstate[] = "__setstate__";
+static const char __pyx_k_TypeError[] = "TypeError";
+static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
+static const char __pyx_k_TreeCursor[] = "TreeCursor";
+static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
+static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static PyObject *__pyx_n_s_Language;
+static const char __pyx_k_NotImplementedError[] = "NotImplementedError";
+static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)";
+static PyObject *__pyx_n_s_NotImplementedError;
+static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
+static PyObject *__pyx_n_s_TreeCursor;
+static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
+static PyObject *__pyx_n_s_reduce;
+static PyObject *__pyx_n_s_reduce_cython;
+static PyObject *__pyx_n_s_reduce_ex;
+static PyObject *__pyx_n_s_setstate;
+static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_tp_new_11tree_sitter_8language_Language(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_8nodeType___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_11nodeIsNamed___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_14start_position___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_12end_position___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_11start_index___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_9end_index___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_go_to_parent(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_2go_to_first_child(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_4go_to_first_child_for_index(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_index); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_6go_to_next_sibling(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_11tree_sitter_11tree_cursor_TreeCursor(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tuple_;
+static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-static PyObject *__pyx_tp_new_11tree_sitter_8language_Language(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+/* "tree_sitter/tree_cursor.pyx":4
+ * 
+ *     @property
+ *     def nodeType(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_8nodeType_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_8nodeType_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_8nodeType___get__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_8nodeType___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":5
+ *     @property
+ *     def nodeType(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 5, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":4
+ * 
+ *     @property
+ *     def nodeType(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.nodeType.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":8
+ * 
+ *     @property
+ *     def nodeIsNamed(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11nodeIsNamed_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11nodeIsNamed_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_11nodeIsNamed___get__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_11nodeIsNamed___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":9
+ *     @property
+ *     def nodeIsNamed(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 9, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":8
+ * 
+ *     @property
+ *     def nodeIsNamed(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.nodeIsNamed.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":12
+ * 
+ *     @property
+ *     def start_position(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_14start_position_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_14start_position_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_14start_position___get__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_14start_position___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":13
+ *     @property
+ *     def start_position(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 13, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":12
+ * 
+ *     @property
+ *     def start_position(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.start_position.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":16
+ * 
+ *     @property
+ *     def end_position(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_12end_position_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_12end_position_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_12end_position___get__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_12end_position___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":17
+ *     @property
+ *     def end_position(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 17, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":16
+ * 
+ *     @property
+ *     def end_position(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.end_position.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":20
+ * 
+ *     @property
+ *     def start_index(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11start_index_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11start_index_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_11start_index___get__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_11start_index___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":21
+ *     @property
+ *     def start_index(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 21, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":20
+ * 
+ *     @property
+ *     def start_index(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.start_index.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":24
+ * 
+ *     @property
+ *     def end_index(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_9end_index_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_9end_index_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_9end_index___get__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_9end_index___get__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":25
+ *     @property
+ *     def end_index(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     def go_to_parent(self):
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 25, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":24
+ * 
+ *     @property
+ *     def end_index(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.end_index.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":27
+ *         raise NotImplementedError
+ * 
+ *     def go_to_parent(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_1go_to_parent(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_1go_to_parent(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_parent (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_go_to_parent(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_go_to_parent(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_parent", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":28
+ * 
+ *     def go_to_parent(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     def go_to_first_child(self):
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 28, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":27
+ *         raise NotImplementedError
+ * 
+ *     def go_to_parent(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.go_to_parent", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":30
+ *         raise NotImplementedError
+ * 
+ *     def go_to_first_child(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_3go_to_first_child(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_3go_to_first_child(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_first_child (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_2go_to_first_child(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_2go_to_first_child(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_first_child", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":31
+ * 
+ *     def go_to_first_child(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     def go_to_first_child_for_index(self, index):
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 31, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":30
+ *         raise NotImplementedError
+ * 
+ *     def go_to_first_child(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.go_to_first_child", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":33
+ *         raise NotImplementedError
+ * 
+ *     def go_to_first_child_for_index(self, index):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_5go_to_first_child_for_index(PyObject *__pyx_v_self, PyObject *__pyx_v_index); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_5go_to_first_child_for_index(PyObject *__pyx_v_self, PyObject *__pyx_v_index) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_first_child_for_index (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_4go_to_first_child_for_index(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self), ((PyObject *)__pyx_v_index));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_4go_to_first_child_for_index(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_index) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_first_child_for_index", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":34
+ * 
+ *     def go_to_first_child_for_index(self, index):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ * 
+ *     def go_to_next_sibling(self):
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 34, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":33
+ *         raise NotImplementedError
+ * 
+ *     def go_to_first_child_for_index(self, index):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.go_to_first_child_for_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tree_sitter/tree_cursor.pyx":36
+ *         raise NotImplementedError
+ * 
+ *     def go_to_next_sibling(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_7go_to_next_sibling(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_7go_to_next_sibling(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_next_sibling (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_6go_to_next_sibling(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_6go_to_next_sibling(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("go_to_next_sibling", 0);
+
+  /* "tree_sitter/tree_cursor.pyx":37
+ * 
+ *     def go_to_next_sibling(self):
+ *         raise NotImplementedError             # <<<<<<<<<<<<<<
+ */
+  __Pyx_Raise(__pyx_builtin_NotImplementedError, 0, 0, 0);
+  __PYX_ERR(0, 37, __pyx_L1_error)
+
+  /* "tree_sitter/tree_cursor.pyx":36
+ *         raise NotImplementedError
+ * 
+ *     def go_to_next_sibling(self):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.go_to_next_sibling", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_8__reduce_cython__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(1, 2, __pyx_L1_error)
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_10__setstate_cython__(((struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11tree_sitter_11tree_cursor_10TreeCursor_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(1, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tree_sitter.tree_cursor.TreeCursor.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_tp_new_11tree_sitter_11tree_cursor_TreeCursor(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -1075,7 +1758,7 @@ static PyObject *__pyx_tp_new_11tree_sitter_8language_Language(PyTypeObject *t, 
   return o;
 }
 
-static void __pyx_tp_dealloc_11tree_sitter_8language_Language(PyObject *o) {
+static void __pyx_tp_dealloc_11tree_sitter_11tree_cursor_TreeCursor(PyObject *o) {
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -1084,12 +1767,56 @@ static void __pyx_tp_dealloc_11tree_sitter_8language_Language(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyTypeObject __pyx_type_11tree_sitter_8language_Language = {
+static PyObject *__pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_nodeType(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_8nodeType_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_nodeIsNamed(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11nodeIsNamed_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_start_position(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_14start_position_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_end_position(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_12end_position_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_start_index(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11start_index_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_end_index(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_9end_index_1__get__(o);
+}
+
+static PyMethodDef __pyx_methods_11tree_sitter_11tree_cursor_TreeCursor[] = {
+  {"go_to_parent", (PyCFunction)__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_1go_to_parent, METH_NOARGS, 0},
+  {"go_to_first_child", (PyCFunction)__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_3go_to_first_child, METH_NOARGS, 0},
+  {"go_to_first_child_for_index", (PyCFunction)__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_5go_to_first_child_for_index, METH_O, 0},
+  {"go_to_next_sibling", (PyCFunction)__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_7go_to_next_sibling, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_9__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_11tree_sitter_11tree_cursor_10TreeCursor_11__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_11tree_sitter_11tree_cursor_TreeCursor[] = {
+  {(char *)"nodeType", __pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_nodeType, 0, (char *)0, 0},
+  {(char *)"nodeIsNamed", __pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_nodeIsNamed, 0, (char *)0, 0},
+  {(char *)"start_position", __pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_start_position, 0, (char *)0, 0},
+  {(char *)"end_position", __pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_end_position, 0, (char *)0, 0},
+  {(char *)"start_index", __pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_start_index, 0, (char *)0, 0},
+  {(char *)"end_index", __pyx_getprop_11tree_sitter_11tree_cursor_10TreeCursor_end_index, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_11tree_sitter_11tree_cursor_TreeCursor = {
   PyVarObject_HEAD_INIT(0, 0)
-  "tree_sitter.language.Language", /*tp_name*/
-  sizeof(struct __pyx_obj_11tree_sitter_8language_Language), /*tp_basicsize*/
+  "tree_sitter.tree_cursor.TreeCursor", /*tp_name*/
+  sizeof(struct __pyx_obj_11tree_sitter_11tree_cursor_TreeCursor), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_11tree_sitter_8language_Language, /*tp_dealloc*/
+  __pyx_tp_dealloc_11tree_sitter_11tree_cursor_TreeCursor, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -1117,9 +1844,9 @@ static PyTypeObject __pyx_type_11tree_sitter_8language_Language = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  0, /*tp_methods*/
+  __pyx_methods_11tree_sitter_11tree_cursor_TreeCursor, /*tp_methods*/
   0, /*tp_members*/
-  0, /*tp_getset*/
+  __pyx_getsets_11tree_sitter_11tree_cursor_TreeCursor, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
@@ -1127,7 +1854,7 @@ static PyTypeObject __pyx_type_11tree_sitter_8language_Language = {
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_11tree_sitter_8language_Language, /*tp_new*/
+  __pyx_tp_new_11tree_sitter_11tree_cursor_TreeCursor, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -1149,17 +1876,17 @@ static PyMethodDef __pyx_methods[] = {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_language(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_tree_cursor(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_language},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_tree_cursor},
   {0, NULL}
 };
 #endif
 
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
-    "language",
+    "tree_cursor",
     0, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
@@ -1188,22 +1915,57 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_n_s_Language, __pyx_k_Language, sizeof(__pyx_k_Language), 0, 0, 1, 1},
+  {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
+  {&__pyx_kp_s_Pickling_of_struct_members_such, __pyx_k_Pickling_of_struct_members_such, sizeof(__pyx_k_Pickling_of_struct_members_such), 0, 0, 1, 0},
+  {&__pyx_n_s_TreeCursor, __pyx_k_TreeCursor, sizeof(__pyx_k_TreeCursor), 0, 0, 1, 1},
+  {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
+  {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
+  {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
+  {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
+  {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
+  {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
+  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
+  __pyx_L1_error:;
+  return -1;
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ */
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("Pickling of struct members such as self._c_cursor must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
@@ -1249,13 +2011,14 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_11tree_sitter_8language_Language) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  __pyx_type_11tree_sitter_8language_Language.tp_print = 0;
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_11tree_sitter_8language_Language.tp_dictoffset && __pyx_type_11tree_sitter_8language_Language.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_11tree_sitter_8language_Language.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if (PyType_Ready(&__pyx_type_11tree_sitter_11tree_cursor_TreeCursor) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_type_11tree_sitter_11tree_cursor_TreeCursor.tp_print = 0;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_11tree_sitter_11tree_cursor_TreeCursor.tp_dictoffset && __pyx_type_11tree_sitter_11tree_cursor_TreeCursor.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_11tree_sitter_11tree_cursor_TreeCursor.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Language, (PyObject *)&__pyx_type_11tree_sitter_8language_Language) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  __pyx_ptype_11tree_sitter_8language_Language = &__pyx_type_11tree_sitter_8language_Language;
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_TreeCursor, (PyObject *)&__pyx_type_11tree_sitter_11tree_cursor_TreeCursor) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11tree_sitter_11tree_cursor_TreeCursor) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_ptype_11tree_sitter_11tree_cursor_TreeCursor = &__pyx_type_11tree_sitter_11tree_cursor_TreeCursor;
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1304,11 +2067,11 @@ static int __Pyx_modinit_function_import_code(void) {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initlanguage(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initlanguage(void)
+__Pyx_PyMODINIT_FUNC inittree_cursor(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC inittree_cursor(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_language(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_language(void)
+__Pyx_PyMODINIT_FUNC PyInit_tree_cursor(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_tree_cursor(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -1375,7 +2138,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_language(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_tree_cursor(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -1384,7 +2147,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_language(PyObject *__pyx_pyinit_mo
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'language' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'tree_cursor' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -1399,7 +2162,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_language(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_tree_cursor(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -1438,7 +2201,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("language", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("tree_cursor", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -1457,14 +2220,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_tree_sitter__language) {
+  if (__pyx_module_is_main_tree_sitter__tree_cursor) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "tree_sitter.language")) {
-      if (unlikely(PyDict_SetItemString(modules, "tree_sitter.language", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "tree_sitter.tree_cursor")) {
+      if (unlikely(PyDict_SetItemString(modules, "tree_sitter.tree_cursor", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -1485,8 +2248,10 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "tree_sitter/language.pyx":1
- *              # <<<<<<<<<<<<<<
+  /* "tree_sitter/tree_cursor.pyx":1
+ * cdef class TreeCursor:             # <<<<<<<<<<<<<<
+ * 
+ *     @property
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1500,11 +2265,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init tree_sitter.language", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init tree_sitter.tree_cursor", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init tree_sitter.language");
+    PyErr_SetString(PyExc_ImportError, "init tree_sitter.tree_cursor");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1532,6 +2297,237 @@ end:
     Py_XDECREF(p);
     Py_XDECREF(m);
     return (__Pyx_RefNannyAPIStruct *)r;
+}
+#endif
+
+/* PyObjectGetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_getattro))
+        return tp->tp_getattro(obj, attr_name);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_getattr))
+        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
+#endif
+    return PyObject_GetAttr(obj, attr_name);
+}
+#endif
+
+/* GetBuiltinName */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
+    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
+    if (unlikely(!result)) {
+        PyErr_Format(PyExc_NameError,
+#if PY_MAJOR_VERSION >= 3
+            "name '%U' is not defined", name);
+#else
+            "name '%.200s' is not defined", PyString_AS_STRING(name));
+#endif
+    }
+    return result;
+}
+
+/* PyErrFetchRestore */
+#if CYTHON_FAST_THREAD_STATE
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+}
+#endif
+
+/* RaiseException */
+#if PY_MAJOR_VERSION < 3
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb,
+                        CYTHON_UNUSED PyObject *cause) {
+    __Pyx_PyThreadState_declare
+    Py_XINCREF(type);
+    if (!value || value == Py_None)
+        value = NULL;
+    else
+        Py_INCREF(value);
+    if (!tb || tb == Py_None)
+        tb = NULL;
+    else {
+        Py_INCREF(tb);
+        if (!PyTraceBack_Check(tb)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: arg 3 must be a traceback or None");
+            goto raise_error;
+        }
+    }
+    if (PyType_Check(type)) {
+#if CYTHON_COMPILING_IN_PYPY
+        if (!value) {
+            Py_INCREF(Py_None);
+            value = Py_None;
+        }
+#endif
+        PyErr_NormalizeException(&type, &value, &tb);
+    } else {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto raise_error;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(type);
+        Py_INCREF(type);
+        if (!PyType_IsSubtype((PyTypeObject *)type, (PyTypeObject *)PyExc_BaseException)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: exception class must be a subclass of BaseException");
+            goto raise_error;
+        }
+    }
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrRestore(type, value, tb);
+    return;
+raise_error:
+    Py_XDECREF(value);
+    Py_XDECREF(type);
+    Py_XDECREF(tb);
+    return;
+}
+#else
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause) {
+    PyObject* owned_instance = NULL;
+    if (tb == Py_None) {
+        tb = 0;
+    } else if (tb && !PyTraceBack_Check(tb)) {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: arg 3 must be a traceback or None");
+        goto bad;
+    }
+    if (value == Py_None)
+        value = 0;
+    if (PyExceptionInstance_Check(type)) {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto bad;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(value);
+    } else if (PyExceptionClass_Check(type)) {
+        PyObject *instance_class = NULL;
+        if (value && PyExceptionInstance_Check(value)) {
+            instance_class = (PyObject*) Py_TYPE(value);
+            if (instance_class != type) {
+                int is_subclass = PyObject_IsSubclass(instance_class, type);
+                if (!is_subclass) {
+                    instance_class = NULL;
+                } else if (unlikely(is_subclass == -1)) {
+                    goto bad;
+                } else {
+                    type = instance_class;
+                }
+            }
+        }
+        if (!instance_class) {
+            PyObject *args;
+            if (!value)
+                args = PyTuple_New(0);
+            else if (PyTuple_Check(value)) {
+                Py_INCREF(value);
+                args = value;
+            } else
+                args = PyTuple_Pack(1, value);
+            if (!args)
+                goto bad;
+            owned_instance = PyObject_Call(type, args, NULL);
+            Py_DECREF(args);
+            if (!owned_instance)
+                goto bad;
+            value = owned_instance;
+            if (!PyExceptionInstance_Check(value)) {
+                PyErr_Format(PyExc_TypeError,
+                             "calling %R should have returned an instance of "
+                             "BaseException, not %R",
+                             type, Py_TYPE(value));
+                goto bad;
+            }
+        }
+    } else {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: exception class must be a subclass of BaseException");
+        goto bad;
+    }
+    if (cause) {
+        PyObject *fixed_cause;
+        if (cause == Py_None) {
+            fixed_cause = NULL;
+        } else if (PyExceptionClass_Check(cause)) {
+            fixed_cause = PyObject_CallObject(cause, NULL);
+            if (fixed_cause == NULL)
+                goto bad;
+        } else if (PyExceptionInstance_Check(cause)) {
+            fixed_cause = cause;
+            Py_INCREF(fixed_cause);
+        } else {
+            PyErr_SetString(PyExc_TypeError,
+                            "exception causes must derive from "
+                            "BaseException");
+            goto bad;
+        }
+        PyException_SetCause(value, fixed_cause);
+    }
+    PyErr_SetObject(type, value);
+    if (tb) {
+#if CYTHON_COMPILING_IN_PYPY
+        PyObject *tmp_type, *tmp_value, *tmp_tb;
+        PyErr_Fetch(&tmp_type, &tmp_value, &tmp_tb);
+        Py_INCREF(tb);
+        PyErr_Restore(tmp_type, tmp_value, tb);
+        Py_XDECREF(tmp_tb);
+#else
+        PyThreadState *tstate = __Pyx_PyThreadState_Current;
+        PyObject* tmp_tb = tstate->curexc_traceback;
+        if (tb != tmp_tb) {
+            Py_INCREF(tb);
+            tstate->curexc_traceback = tb;
+            Py_XDECREF(tmp_tb);
+        }
+#endif
+    }
+bad:
+    Py_XDECREF(owned_instance);
+    return;
+}
+#endif
+
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
 }
 #endif
 
@@ -1585,43 +2581,81 @@ static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_nam
 }
 #endif
 
-/* PyObjectGetAttrStr */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_getattro))
-        return tp->tp_getattro(obj, attr_name);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_getattr))
-        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
-#endif
-    return PyObject_GetAttr(obj, attr_name);
+/* SetupReduce */
+static int __Pyx_setup_reduce_is_named(PyObject* meth, PyObject* name) {
+  int ret;
+  PyObject *name_attr;
+  name_attr = __Pyx_PyObject_GetAttrStr(meth, __pyx_n_s_name);
+  if (likely(name_attr)) {
+      ret = PyObject_RichCompareBool(name_attr, name, Py_EQ);
+  } else {
+      ret = -1;
+  }
+  if (unlikely(ret < 0)) {
+      PyErr_Clear();
+      ret = 0;
+  }
+  Py_XDECREF(name_attr);
+  return ret;
 }
+static int __Pyx_setup_reduce(PyObject* type_obj) {
+    int ret = 0;
+    PyObject *object_reduce = NULL;
+    PyObject *object_reduce_ex = NULL;
+    PyObject *reduce = NULL;
+    PyObject *reduce_ex = NULL;
+    PyObject *reduce_cython = NULL;
+    PyObject *setstate = NULL;
+    PyObject *setstate_cython = NULL;
+#if CYTHON_USE_PYTYPE_LOOKUP
+    if (_PyType_Lookup((PyTypeObject*)type_obj, __pyx_n_s_getstate)) goto GOOD;
+#else
+    if (PyObject_HasAttr(type_obj, __pyx_n_s_getstate)) goto GOOD;
 #endif
-
-/* PyErrFetchRestore */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    tmp_type = tstate->curexc_type;
-    tmp_value = tstate->curexc_value;
-    tmp_tb = tstate->curexc_traceback;
-    tstate->curexc_type = type;
-    tstate->curexc_value = value;
-    tstate->curexc_traceback = tb;
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    *type = tstate->curexc_type;
-    *value = tstate->curexc_value;
-    *tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-}
+#if CYTHON_USE_PYTYPE_LOOKUP
+    object_reduce_ex = _PyType_Lookup(&PyBaseObject_Type, __pyx_n_s_reduce_ex); if (!object_reduce_ex) goto BAD;
+#else
+    object_reduce_ex = __Pyx_PyObject_GetAttrStr((PyObject*)&PyBaseObject_Type, __pyx_n_s_reduce_ex); if (!object_reduce_ex) goto BAD;
 #endif
+    reduce_ex = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_n_s_reduce_ex); if (unlikely(!reduce_ex)) goto BAD;
+    if (reduce_ex == object_reduce_ex) {
+#if CYTHON_USE_PYTYPE_LOOKUP
+        object_reduce = _PyType_Lookup(&PyBaseObject_Type, __pyx_n_s_reduce); if (!object_reduce) goto BAD;
+#else
+        object_reduce = __Pyx_PyObject_GetAttrStr((PyObject*)&PyBaseObject_Type, __pyx_n_s_reduce); if (!object_reduce) goto BAD;
+#endif
+        reduce = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_n_s_reduce); if (unlikely(!reduce)) goto BAD;
+        if (reduce == object_reduce || __Pyx_setup_reduce_is_named(reduce, __pyx_n_s_reduce_cython)) {
+            reduce_cython = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_n_s_reduce_cython); if (unlikely(!reduce_cython)) goto BAD;
+            ret = PyDict_SetItem(((PyTypeObject*)type_obj)->tp_dict, __pyx_n_s_reduce, reduce_cython); if (unlikely(ret < 0)) goto BAD;
+            ret = PyDict_DelItem(((PyTypeObject*)type_obj)->tp_dict, __pyx_n_s_reduce_cython); if (unlikely(ret < 0)) goto BAD;
+            setstate = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_n_s_setstate);
+            if (!setstate) PyErr_Clear();
+            if (!setstate || __Pyx_setup_reduce_is_named(setstate, __pyx_n_s_setstate_cython)) {
+                setstate_cython = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_n_s_setstate_cython); if (unlikely(!setstate_cython)) goto BAD;
+                ret = PyDict_SetItem(((PyTypeObject*)type_obj)->tp_dict, __pyx_n_s_setstate, setstate_cython); if (unlikely(ret < 0)) goto BAD;
+                ret = PyDict_DelItem(((PyTypeObject*)type_obj)->tp_dict, __pyx_n_s_setstate_cython); if (unlikely(ret < 0)) goto BAD;
+            }
+            PyType_Modified((PyTypeObject*)type_obj);
+        }
+    }
+    goto GOOD;
+BAD:
+    if (!PyErr_Occurred())
+        PyErr_Format(PyExc_RuntimeError, "Unable to initialize pickling for %s", ((PyTypeObject*)type_obj)->tp_name);
+    ret = -1;
+GOOD:
+#if !CYTHON_USE_PYTYPE_LOOKUP
+    Py_XDECREF(object_reduce);
+    Py_XDECREF(object_reduce_ex);
+#endif
+    Py_XDECREF(reduce);
+    Py_XDECREF(reduce_ex);
+    Py_XDECREF(reduce_cython);
+    Py_XDECREF(setstate);
+    Py_XDECREF(setstate_cython);
+    return ret;
+}
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK

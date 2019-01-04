@@ -1,4 +1,4 @@
-cimport cruntime
+from binding cimport TSTreeCursor
 
 cdef class TreeCursor:
-    cdef cruntime.TSTreeCursor _c_cursor
+    cdef TSTreeCursor _c_cursor

@@ -1,4 +1,4 @@
-cimport cruntime
+from binding cimport TSNode
 
 cdef class Node:
-    cdef cruntime.TSNode _c_node
+    cdef TSNode _c_node
